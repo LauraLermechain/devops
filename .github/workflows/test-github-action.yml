@@ -8,6 +8,9 @@ jobs:
       - run: npm install
       - run: npm run build
 
+      - name: Audit des dépendances
+        run: npm audit --audit-level=high || true
+
       - name: Scan des secrets (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
         env:
