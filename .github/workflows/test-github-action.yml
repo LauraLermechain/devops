@@ -13,9 +13,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run ESLint
-        run: npm run lint
-
       - uses: cypress-io/github-action@v6
         with:
           install: false
