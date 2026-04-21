@@ -3,18 +3,18 @@ on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
-  needs: build
-  steps:
-    - name: Deploy on server
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          ls
-          cd /home/azureuser/next-cda25
-          git pull
-          npm install
-          npm run build
-          pm2 restart next-app || pm2 start npm --name "next-app" -- run start
+    needs: build
+    steps:
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            ls
+            cd /home/azureuser/next-cda25
+            git pull
+            npm install
+            npm run build
+            pm2 restart next-app || pm2 start npm --name "next-app" -- run start
